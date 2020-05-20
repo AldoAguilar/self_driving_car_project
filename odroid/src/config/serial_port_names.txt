@@ -1,0 +1,2 @@
+SENSORS /dev/ttyUSB1
+ACTUATORS /dev/ttyUSB0

@@ -1,0 +1,2 @@
+ros_self_driving_car
+-DCATKIN_DEVEL_PREFIX=/home/odroid/self_driving_car_project/odroid/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/odroid/self_driving_car_project/odroid/catkin_ws/install -G Unix Makefiles
