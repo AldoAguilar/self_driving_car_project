@@ -8,16 +8,12 @@ This repository is dedicated to the development of a robotic system capable of p
 ## Table of Contents
 
 * [Project Description](#project-description)
-
 * [Installation](#installation)
-
   - [Hardware prerequisites](#hardware-prerequisites)
-
   - [Software prerequisites](#software-prerequisites)
-
   - [Hardware setup](#hardware-setup)
-  
-    + [Electric connections](#electric-connections)
+  - [Software setup](#software-setup)
+  - [Network setup](#network-setup)
 
 ## Project Description
 The objective of this project is to develop an autonomous driving robotic system using a 1/10 RC Vehicle which is instrumented using specific hardware to control and measure its velocity and direction through ROS. As mentioned, a Deep Neural Network is used to Control the autonomous behavior of the vehicle which is trained and tested using the information of the vehicle's direction and speed data as well as visual and spatial information provided by an RGB/Depth camera and a Lidar sensor mounted in the vehicle.
@@ -82,8 +78,141 @@ Setting up the electric connections is pretty straightforward, if working with a
   <img src="doc/img/circuit.jpg">
 </p>
 
+### Software setup
+#### ODROID XU4
 
-#### Hardware Mounting
+* Username: odroid
+* Password: odroid
+
+
+##### Clone GitHub repository
+In a terminal, run the next command in your Home directory:
+```
+git clone http://github.com/AldoAguilar/self_driving_car_project
+```
+Add the project `setup.bash` file to your bash session so that it is sourced every time a new shell is launched:
+```
+echo "source ~/self_driving_car_project/odroid/catkin_ws/devel/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+
+##### Configure Auto-Login
+Run the following commands in terminal:
+```
+sudo su
+cd /usr/share/lightdm/lightdm.conf.d
+touch 60-lightdm-gtk-greeter.Configurenano 60-lightdm-gtk-greeter.conf
+```
+If the file isn't blank, add these to the end of the file. If the file is blank, add these lines to the file:
+
+```
+[SeatDefaults]
+greeter-session=lightdm-gtk-greeter
+autologin-user=odroid
+```
+Files in this directory are processed in alphabetical order.
+
+The next time you reboot, the user specified after `autologin-user=` should be logged in automatically.
+##### Installing ROS
+Once Ubuntu MATE 18.04 has been installed in the board, it's necessary to install the ROS Melodic distribution. This section is based on the more in-depth tutorial from the ROS Wiki: [Ubuntu install of ROS Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu). For a more detailed explanation please read the provided link.  
+
+Setup your computer to accept software from packages.ros.org.
+
+```
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+```
+
+Setup the keys:
+
+```
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+```
+
+Make sure your package index is up-to-date:
+
+```
+sudo apt-get update
+```
+
+Perform a ROS Melodic full installation:
+```
+sudo apt-get install ros-melodic-desktop-full
+```
+
+Initialize rosdep:
+```
+sudo rosdep init
+rosdep update
+```
+Setup your ROS environment variables to be automatically added to your bash session every time a new shell is launched:
+```
+echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc
+source ~/.bashrc
+```
+Install other dependencies for building ROS packages:
+```
+sudo apt install python-rosinstall python-rosinstall-generator python-wstool build-essential
+```
+
+##### Arduino CLI Configuration
+Go to the Odroid's Arduino Src Directory in `~/self_driving_car_project/odroid/src/arduino`.
+It will be necessary to update the local cache of available platforms and libraries of the [arduino-cli](https://github.com/arduino/arduino-cli) tool, run the next command in terminal:
+
+```
+./arduino-cli core update-index
+```
+
+Install the core for Arduino Nano boards, run the next command in terminal:
+```
+./arduino-cli core install arduino:avr
+```
+
+#### JETSON NANO
+
+The Jetson Nano will be responsible of managing the video, data management and Machine Learning algorithms. It wil be then necessary to install the required resources.
+
+##### Clone GitHub repository
+In a terminal, run the next command in your Home directory:
+```
+git clone http://github.com/AldoAguilar/self_driving_car_project
+```
+
+##### Install RealSense
+The project depends on the utilization of the Intel Realsense Depth Camera SR300 which requires to install the Intel Realsense Libraries and drivers. The installation process can be different depending on the platform where the device is going to be used, however for total compatibility and support of this device it's recommended to make a native installation by compiling the resource code of the mentioned drivers.
+
+The Jetson Nano as well as many other development platforms comes with a predefined Kernel with support for specific type of devices however it's possible to allow different devices by recompiling the boards kernel and enabling the required resources to allow the support for the mentioned devices. The Intel Realsense Cameras require specific Kernel patches for it to be natively compiled. For more information you can visit [this](https://github.com/JetsonHacksNano/installLibrealsense/tree/vL4T32.2.1) GitHub repository used as a basis for the installation scripts defined in this project.
+
+To path the Jetson Nano's kernel for Intel Realsense Cameras support, go to the `realsense` directory and execute the command:
+```
+sudo ./pathcKernel.sh
+```
+This script will automatically install all the required resources for the kernel patch and recompile the loaded kernel, it's a long process that may take several minutes. Once it has concluded you will have to reboot your board in order to proceed with the Librealsense Libraries and Drivers.
+
+Once the Kernel patch has been successfully achieved, return to the `realsense`directory and execute the next command:
+
+```
+sudo ./installLibrealsense.sh
+```
+
+This will install all the required resources and compile the Intel Librealsense libraries for its usage in your Jetson Nano board. It's a long process that may take several minutes to be completed. Finally you can run the command `rs-depth` in terminal with the SR300 Camera connected to see a Plain Text representation of the depth values obtained vy the camera, validating the correct installation of the resources.
+
+
+##### Install ROS
+Go to the Jetson Install Resources Directory in `~/self_driving_car_project/jetson/install`, the go to the `ros` directory and run the command:
+```
+sudo ./installROS.sh
+```
+This will execute a Shell Script that will automatically install all ROS Melodic Resources for the Jetson Nano.
+It's important to run this script after having installed the Intel Realsense resources as it will also install the Realsense ROS Package that requires the Librealsense Libraries and Drivers to be installed first.
+
+##### Install Tensorflow
+As mentioned, the Jetson Nano will be used to execute all the Machine Learning processes, Tensorflow will be the selected platform to achieve this purpose, in order to install this Platform, go to the `tensorflow` install epository and execute the command:
+
+```
+sudo ./installTensorFlow.sh
+sudo ./installKeras.sh
+```
+This will install the Tensorflow and Keras resources in your board.
 
 
 
