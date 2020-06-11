@@ -14,6 +14,7 @@ This repository is dedicated to the development of a robotic system capable of p
   - [Hardware setup](#hardware-setup)
   - [Software setup](#software-setup)
   - [Network setup](#network-setup)
+* [ROS Architecure](#ros-architecture)
 
 ## Project Description
 The objective of this project is to develop an autonomous driving robotic system using a 1/10 RC Vehicle which is instrumented using specific hardware to control and measure its velocity and direction through ROS. As mentioned, a Deep Neural Network is used to Control the autonomous behavior of the vehicle which is trained and tested using the information of the vehicle's direction and speed data as well as visual and spatial information provided by an RGB/Depth camera and a Lidar sensor mounted in the vehicle.
@@ -233,6 +234,64 @@ sudo ./installKeras.sh
 This will install the Tensorflow and Keras resources in your board.
 
 ### Network setup
+
+The project is conformed of three network devices working together the Jetson Nano and Odroid Development boards and the Personal PC used to monitor the execution of the project at a given moment. To achieve this communication, it's necessary to have a reserved router used to manage all network traffic between this devices. In this project the selected router is the [Linksys Wireless-G WRT54GL](doc/datasheets/WRT54GL_Manual.pdf),  
+
+<p align="center">
+  <img src="doc/img/network.jpg">
+</p>
+
+*NOTE: Notice that the IP Addresses displayed in the previous image are not necessarily consistent with the ones used in the project.*
+
+As already mentioned, the project will mainly run over ROS, therefore it's necessary to take into consideration the [ROS Network Architecture](http://wiki.ros.org/ROS/NetworkSetup). However you'll surely have some considerations to take into account. Mainly as specified in the network configuration, your personal PC and the Odroid Board will be directly connected to the Router, the PC will be connected via ethernet, while the Odroid Board will be connected using the USB WiFi Adapter. The Jetson board is connected to the Odroid board with an ethernet cable, however it's easy to observe that this connection correspond to a specific LAN formed by the Odroid and the Jetson's ethernet connection only and do not correspond to the same network that your PC and the Odroid Wireless adapter are part of. This can be concluded by observing the assigned IP Addresses of the previously displayed Architecture.
+
+ROS Network Setup requires a full connectivity between all the devices, in this case the PC, Odroid and Jetson board. However this cannot be directly achieved if, as previously stated, the Jetson and Odroid boards conform a different Network than the one between the PC and the Odroid board, but this doesn't mean that the connectivity between for instance between your PC and the Jetson board cannot be achieved. In general the connectivity between different networks can be achieved by using routing tables and allowing the Odroid board to share the router connectivity to the Jetson board through its ethernet adapter connection.
+
+The general network setup to be achieved can be described in steps:
+1. Connect your Router to a Internet enabled connection via ethernet (i.e. One of your modem Ethernet ports).
+2. Connect your PC to the router either using your PC Wireless or ethernet adapter.
+3. Connect your Odroid board to the router using the USB WiFi adapter.
+4. Look for the IP Addresses of both your PC and the Odroid board WiFi adapter.
+5. In your PC, ping your Odroid board i.e:
+```
+ping 192.168.1.1
+```
+6. In your Odroid ping your PC i.e:
+```
+ping 192.168.1.3
+```
+7. If internet connection is desired in your devices, enter any browser and try to open any URL (i.e: https://github.com/AldoAguilar/self_driving_car_project).
+8. Enable shared wireless connection in your Odroid in order to share the stablished wireless connection with your Jetson board, you can follow the instructions given in [this post](https://askubuntu.com/questions/359856/share-wireless-internet-connection-through-ethernet) .
+9. Look for the IP Addresses of both your Odroid and Jetson ethernet adapters.
+10. In your Odroid board, ping the Jetson board ethernet adapter i.e:
+```
+ping 10.47.0.2
+```
+11. In your Jetson board, ping the Odroid board ethernet adapter i.e:
+```
+ping 10.47.0.1
+```
+12. If the pings succeeded you are ready to establish the routing table and firewall configurations in order to achieve the desired full connectivity. We'll start with the firewall configuration, it's easy to acknowledge that the device responsible of translating a message from one network to the other is the Odroid board as it's the only device that is connected to both LANs.    
+A firewall can block or allow the traffic of network messages from different IP addresses/networks to another. By default the firewall configuration of this board can be problematic as at some point it can cause the blocking of network messages whether coming from the Personal PC or the Jetson board.  
+Although this firewall configurations can be managed depending on the actual architecture of your network this guide will recommend to disable the firewall in your Odroid board so that any traffic from any network can be accepted by the board and redirected to any network adapter. *NOTE: Disabling the firewall can cause certain security issues in your device, it's highly recommended that the firewall is disabled only if your device has no connection the internet and is only working in a managed LAN network.*  
+In order to disable the Odroid's firewall configuration open a terminal window and type the next command:
+```
+sudo iptables -F
+```
+13. Finally it'll be necessary to define the routing tables so that the complete connectivity can be achieved. The main procedure can be read in [this post](https://answers.ros.org/question/256070/problems-with-communication-between-multiple-machines/). For instance, in the case of the displayed network sample, in your personal PC introduce the command:
+```
+sudo route add -net 10.47.0.0 netmask 255.255.255.0 gw 192.168.1.1
+```
+This command states that any device in the _10.47.0.0/24_ network can be found uding the connection with the device with IP _192.168.1.2_ which corresponds to the Odroid's WiFi adapter.  
+In the case of the Jetson's routing table, in your Jetson board introduce the command:
+```
+sudo route add -net 192.168.1.0 netmask 255.255.255.0 gw 10.47.0.1
+```
+
+## ROS Architecture
+<p align="center">
+  <img src="doc/img/ros.jpg">
+</p>
 
 ## References
 1. Turnigy. (2016). *Trooper SCT-X4 User Manual*. Retrieved from: [https://hobbyking.com/es_es/turnigy-trooper-sct-x4-1-10-4x4-nitro-short-course-truck-rtr.html](doc/datasheets/SCT-X4_Manual.pdf)
