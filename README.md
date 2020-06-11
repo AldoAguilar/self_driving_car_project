@@ -86,14 +86,6 @@ The montage of the different hardware components requires to manufacture certain
 | --- |
 
 <p align="center">
-  <img width="480" height="460" src="pc/freecad/doc/img/small_plate.jpg">
-</p>
-
-<p align="center">
-  <img width="800" height="460" src="pc/freecad/doc/img/large_plate.jpg">
-</p>
-
-<p align="center">
   <img src="pc/freecad/doc/img/car1.jpeg">
 </p>
 
