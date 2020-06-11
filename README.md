@@ -78,6 +78,24 @@ Setting up the electric connections is pretty straightforward, if working with a
   <img src="doc/img/circuit.jpg">
 </p>
 
+#### Hardware montage
+The montage of the different hardware components requires to manufacture certain elements such as two acrylic plates and a pair of support posts. This will function as the base for the hardware montage where each component is screwed with a corresponding spacer.
+
+| NOTE: For more information regarding the implemented hardware montage or for further updates and modifications go [here](pc/freecad). |
+| --- |
+
+<p align="center">
+  <img width="480" height="460" src="pc/freecad/doc/img/small_plate.jpg">
+</p>
+
+<p align="center">
+  <img width="800" height="460" src="pc/freecad/doc/img/large_plate.jpg">
+</p>
+
+<p align="center">
+  <img src="pc/freecad/doc/img/car1.jpeg">
+</p>
+
 ### Software setup
 #### ODROID XU4
 
@@ -214,7 +232,7 @@ sudo ./installKeras.sh
 ```
 This will install the Tensorflow and Keras resources in your board.
 
-
+### Network setup
 
 ## References
 1. Turnigy. (2016). *Trooper SCT-X4 User Manual*. Retrieved from: [https://hobbyking.com/es_es/turnigy-trooper-sct-x4-1-10-4x4-nitro-short-course-truck-rtr.html](doc/datasheets/SCT-X4_Manual.pdf)

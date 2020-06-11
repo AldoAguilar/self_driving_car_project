@@ -11,15 +11,10 @@ This directory includes the [KiCad](https://www.kicad-pcb.org/) **"pcb"** projec
 ## Table of Contents
 
 * [Project Description](#project-description)
-
 * [Installation](#installation)
-
   - [Software prerequisites](#software-prerequisites)
-
   - [Hardware prerequisites](#hardware-prerequisites)
-
   - [Software setup](#software-setup)
-  
   - [Hardware setup](#hardware-setup)
 
 ## Project Description
@@ -42,7 +37,7 @@ In order to open and make use of the **"pcb"** source files it'll be necessary t
   <img src="doc/img/main.jpg">
 </p>
 
-* Go to the [pcb project directory](pcb) and open the **pc.pro** file.
+* Go to the [pcb project directory](pcb) and open the **pcb.pro** file.
 * You'll now see a tree view in the left menu box similar to:
 
 <p align="center">
