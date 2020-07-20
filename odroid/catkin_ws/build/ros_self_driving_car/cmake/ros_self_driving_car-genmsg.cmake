@@ -1,6 +1,6 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "ros_self_driving_car: 2 messages, 0 services")
+message(STATUS "ros_self_driving_car: 2 messages, 3 services")
 
 set(MSG_I_FLAGS "-Iros_self_driving_car:/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg;-Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg")
 
@@ -16,6 +16,21 @@ add_custom_target(ros_self_driving_car_generate_messages ALL)
 # verify that message/service dependencies have not changed since configure
 
 
+
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv" NAME_WE)
+add_custom_target(_ros_self_driving_car_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_self_driving_car" "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv" ""
+)
+
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv" NAME_WE)
+add_custom_target(_ros_self_driving_car_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_self_driving_car" "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv" ""
+)
+
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv" NAME_WE)
+add_custom_target(_ros_self_driving_car_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_self_driving_car" "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv" ""
+)
 
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg" NAME_WE)
 add_custom_target(_ros_self_driving_car_generate_messages_check_deps_${_filename}
@@ -47,6 +62,24 @@ _generate_msg_cpp(ros_self_driving_car
 )
 
 ### Generating Services
+_generate_srv_cpp(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_cpp(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_cpp(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ros_self_driving_car
+)
 
 ### Generating Module File
 _generate_module_cpp(ros_self_driving_car
@@ -60,6 +93,12 @@ add_custom_target(ros_self_driving_car_generate_messages_cpp
 add_dependencies(ros_self_driving_car_generate_messages ros_self_driving_car_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_cpp _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_cpp _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_cpp _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg" NAME_WE)
 add_dependencies(ros_self_driving_car_generate_messages_cpp _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg" NAME_WE)
@@ -88,6 +127,24 @@ _generate_msg_eus(ros_self_driving_car
 )
 
 ### Generating Services
+_generate_srv_eus(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_eus(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_eus(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ros_self_driving_car
+)
 
 ### Generating Module File
 _generate_module_eus(ros_self_driving_car
@@ -101,6 +158,12 @@ add_custom_target(ros_self_driving_car_generate_messages_eus
 add_dependencies(ros_self_driving_car_generate_messages ros_self_driving_car_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_eus _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_eus _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_eus _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg" NAME_WE)
 add_dependencies(ros_self_driving_car_generate_messages_eus _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg" NAME_WE)
@@ -129,6 +192,24 @@ _generate_msg_lisp(ros_self_driving_car
 )
 
 ### Generating Services
+_generate_srv_lisp(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_lisp(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_lisp(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ros_self_driving_car
+)
 
 ### Generating Module File
 _generate_module_lisp(ros_self_driving_car
@@ -142,6 +223,12 @@ add_custom_target(ros_self_driving_car_generate_messages_lisp
 add_dependencies(ros_self_driving_car_generate_messages ros_self_driving_car_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_lisp _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_lisp _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_lisp _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg" NAME_WE)
 add_dependencies(ros_self_driving_car_generate_messages_lisp _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg" NAME_WE)
@@ -170,6 +257,24 @@ _generate_msg_nodejs(ros_self_driving_car
 )
 
 ### Generating Services
+_generate_srv_nodejs(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_nodejs(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_nodejs(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ros_self_driving_car
+)
 
 ### Generating Module File
 _generate_module_nodejs(ros_self_driving_car
@@ -183,6 +288,12 @@ add_custom_target(ros_self_driving_car_generate_messages_nodejs
 add_dependencies(ros_self_driving_car_generate_messages ros_self_driving_car_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_nodejs _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_nodejs _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_nodejs _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg" NAME_WE)
 add_dependencies(ros_self_driving_car_generate_messages_nodejs _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg" NAME_WE)
@@ -211,6 +322,24 @@ _generate_msg_py(ros_self_driving_car
 )
 
 ### Generating Services
+_generate_srv_py(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_py(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ros_self_driving_car
+)
+_generate_srv_py(ros_self_driving_car
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ros_self_driving_car
+)
 
 ### Generating Module File
 _generate_module_py(ros_self_driving_car
@@ -224,6 +353,12 @@ add_custom_target(ros_self_driving_car_generate_messages_py
 add_dependencies(ros_self_driving_car_generate_messages ros_self_driving_car_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_py _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_py _ros_self_driving_car_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv" NAME_WE)
+add_dependencies(ros_self_driving_car_generate_messages_py _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg" NAME_WE)
 add_dependencies(ros_self_driving_car_generate_messages_py _ros_self_driving_car_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg" NAME_WE)

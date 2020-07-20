@@ -28,14 +28,22 @@ struct SensorsData_
     , speed(0)
     , angle(0)
     , motor_cnt(0)
-    , servo_cnt(0)  {
+    , servo_cnt(0)
+    , wheel_1_success(false)
+    , wheel_2_success(false)
+    , wheel_3_success(false)
+    , wheel_4_success(false)  {
     }
   SensorsData_(const ContainerAllocator& _alloc)
     : op_mode(_alloc)
     , speed(0)
     , angle(0)
     , motor_cnt(0)
-    , servo_cnt(0)  {
+    , servo_cnt(0)
+    , wheel_1_success(false)
+    , wheel_2_success(false)
+    , wheel_3_success(false)
+    , wheel_4_success(false)  {
   (void)_alloc;
     }
 
@@ -55,6 +63,18 @@ struct SensorsData_
 
    typedef uint32_t _servo_cnt_type;
   _servo_cnt_type servo_cnt;
+
+   typedef uint8_t _wheel_1_success_type;
+  _wheel_1_success_type wheel_1_success;
+
+   typedef uint8_t _wheel_2_success_type;
+  _wheel_2_success_type wheel_2_success;
+
+   typedef uint8_t _wheel_3_success_type;
+  _wheel_3_success_type wheel_3_success;
+
+   typedef uint8_t _wheel_4_success_type;
+  _wheel_4_success_type wheel_4_success;
 
 
 
@@ -89,7 +109,11 @@ bool operator==(const ::ros_self_driving_car::SensorsData_<ContainerAllocator1> 
     lhs.speed == rhs.speed &&
     lhs.angle == rhs.angle &&
     lhs.motor_cnt == rhs.motor_cnt &&
-    lhs.servo_cnt == rhs.servo_cnt;
+    lhs.servo_cnt == rhs.servo_cnt &&
+    lhs.wheel_1_success == rhs.wheel_1_success &&
+    lhs.wheel_2_success == rhs.wheel_2_success &&
+    lhs.wheel_3_success == rhs.wheel_3_success &&
+    lhs.wheel_4_success == rhs.wheel_4_success;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -146,12 +170,12 @@ struct MD5Sum< ::ros_self_driving_car::SensorsData_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "f03b55dfb7ed838621525bc6021ad49d";
+    return "e00fea77b9600c9d4424dbbf41aef137";
   }
 
   static const char* value(const ::ros_self_driving_car::SensorsData_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xf03b55dfb7ed8386ULL;
-  static const uint64_t static_value2 = 0x21525bc6021ad49dULL;
+  static const uint64_t static_value1 = 0xe00fea77b9600c9dULL;
+  static const uint64_t static_value2 = 0x4424dbbf41aef137ULL;
 };
 
 template<class ContainerAllocator>
@@ -175,6 +199,10 @@ struct Definition< ::ros_self_driving_car::SensorsData_<ContainerAllocator> >
 "uint32 angle\n"
 "uint32 motor_cnt\n"
 "uint32 servo_cnt\n"
+"bool wheel_1_success\n"
+"bool wheel_2_success\n"
+"bool wheel_3_success\n"
+"bool wheel_4_success\n"
 ;
   }
 
@@ -198,6 +226,10 @@ namespace serialization
       stream.next(m.angle);
       stream.next(m.motor_cnt);
       stream.next(m.servo_cnt);
+      stream.next(m.wheel_1_success);
+      stream.next(m.wheel_2_success);
+      stream.next(m.wheel_3_success);
+      stream.next(m.wheel_4_success);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -226,6 +258,14 @@ struct Printer< ::ros_self_driving_car::SensorsData_<ContainerAllocator> >
     Printer<uint32_t>::stream(s, indent + "  ", v.motor_cnt);
     s << indent << "servo_cnt: ";
     Printer<uint32_t>::stream(s, indent + "  ", v.servo_cnt);
+    s << indent << "wheel_1_success: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.wheel_1_success);
+    s << indent << "wheel_2_success: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.wheel_2_success);
+    s << indent << "wheel_3_success: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.wheel_3_success);
+    s << indent << "wheel_4_success: ";
+    Printer<uint8_t>::stream(s, indent + "  ", v.wheel_4_success);
   }
 };
 

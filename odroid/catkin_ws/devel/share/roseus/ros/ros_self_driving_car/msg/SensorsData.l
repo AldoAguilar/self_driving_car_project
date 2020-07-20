@@ -14,7 +14,7 @@
 
 (defclass ros_self_driving_car::SensorsData
   :super ros::object
-  :slots (_op_mode _speed _angle _motor_cnt _servo_cnt ))
+  :slots (_op_mode _speed _angle _motor_cnt _servo_cnt _wheel_1_success _wheel_2_success _wheel_3_success _wheel_4_success ))
 
 (defmethod ros_self_driving_car::SensorsData
   (:init
@@ -24,6 +24,10 @@
     ((:angle __angle) 0)
     ((:motor_cnt __motor_cnt) 0)
     ((:servo_cnt __servo_cnt) 0)
+    ((:wheel_1_success __wheel_1_success) nil)
+    ((:wheel_2_success __wheel_2_success) nil)
+    ((:wheel_3_success __wheel_3_success) nil)
+    ((:wheel_4_success __wheel_4_success) nil)
     )
    (send-super :init)
    (setq _op_mode (string __op_mode))
@@ -31,6 +35,10 @@
    (setq _angle (round __angle))
    (setq _motor_cnt (round __motor_cnt))
    (setq _servo_cnt (round __servo_cnt))
+   (setq _wheel_1_success __wheel_1_success)
+   (setq _wheel_2_success __wheel_2_success)
+   (setq _wheel_3_success __wheel_3_success)
+   (setq _wheel_4_success __wheel_4_success)
    self)
   (:op_mode
    (&optional __op_mode)
@@ -47,6 +55,18 @@
   (:servo_cnt
    (&optional __servo_cnt)
    (if __servo_cnt (setq _servo_cnt __servo_cnt)) _servo_cnt)
+  (:wheel_1_success
+   (&optional __wheel_1_success)
+   (if __wheel_1_success (setq _wheel_1_success __wheel_1_success)) _wheel_1_success)
+  (:wheel_2_success
+   (&optional __wheel_2_success)
+   (if __wheel_2_success (setq _wheel_2_success __wheel_2_success)) _wheel_2_success)
+  (:wheel_3_success
+   (&optional __wheel_3_success)
+   (if __wheel_3_success (setq _wheel_3_success __wheel_3_success)) _wheel_3_success)
+  (:wheel_4_success
+   (&optional __wheel_4_success)
+   (if __wheel_4_success (setq _wheel_4_success __wheel_4_success)) _wheel_4_success)
   (:serialization-length
    ()
    (+
@@ -60,6 +80,14 @@
     4
     ;; uint32 _servo_cnt
     4
+    ;; bool _wheel_1_success
+    1
+    ;; bool _wheel_2_success
+    1
+    ;; bool _wheel_3_success
+    1
+    ;; bool _wheel_4_success
+    1
     ))
   (:serialize
    (&optional strm)
@@ -75,6 +103,14 @@
        (write-long _motor_cnt s)
      ;; uint32 _servo_cnt
        (write-long _servo_cnt s)
+     ;; bool _wheel_1_success
+       (if _wheel_1_success (write-byte -1 s) (write-byte 0 s))
+     ;; bool _wheel_2_success
+       (if _wheel_2_success (write-byte -1 s) (write-byte 0 s))
+     ;; bool _wheel_3_success
+       (if _wheel_3_success (write-byte -1 s) (write-byte 0 s))
+     ;; bool _wheel_4_success
+       (if _wheel_4_success (write-byte -1 s) (write-byte 0 s))
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
@@ -89,11 +125,19 @@
      (setq _motor_cnt (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; uint32 _servo_cnt
      (setq _servo_cnt (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; bool _wheel_1_success
+     (setq _wheel_1_success (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
+   ;; bool _wheel_2_success
+     (setq _wheel_2_success (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
+   ;; bool _wheel_3_success
+     (setq _wheel_3_success (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
+   ;; bool _wheel_4_success
+     (setq _wheel_4_success (not (= 0 (sys::peek buf ptr- :char)))) (incf ptr- 1)
    ;;
    self)
   )
 
-(setf (get ros_self_driving_car::SensorsData :md5sum-) "f03b55dfb7ed838621525bc6021ad49d")
+(setf (get ros_self_driving_car::SensorsData :md5sum-) "e00fea77b9600c9d4424dbbf41aef137")
 (setf (get ros_self_driving_car::SensorsData :datatype-) "ros_self_driving_car/SensorsData")
 (setf (get ros_self_driving_car::SensorsData :definition-)
       "string op_mode
@@ -101,11 +145,15 @@ uint32 speed
 uint32 angle
 uint32 motor_cnt
 uint32 servo_cnt
+bool wheel_1_success
+bool wheel_2_success
+bool wheel_3_success
+bool wheel_4_success
 
 ")
 
 
 
-(provide :ros_self_driving_car/SensorsData "f03b55dfb7ed838621525bc6021ad49d")
+(provide :ros_self_driving_car/SensorsData "e00fea77b9600c9d4424dbbf41aef137")
 
 

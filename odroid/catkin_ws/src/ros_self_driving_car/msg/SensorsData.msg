@@ -3,3 +3,7 @@ uint32 speed
 uint32 angle
 uint32 motor_cnt
 uint32 servo_cnt
+bool wheel_1_success
+bool wheel_2_success
+bool wheel_3_success
+bool wheel_4_success

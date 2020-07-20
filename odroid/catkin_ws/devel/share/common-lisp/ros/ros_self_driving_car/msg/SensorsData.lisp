@@ -31,7 +31,27 @@
     :reader servo_cnt
     :initarg :servo_cnt
     :type cl:integer
-    :initform 0))
+    :initform 0)
+   (wheel_1_success
+    :reader wheel_1_success
+    :initarg :wheel_1_success
+    :type cl:boolean
+    :initform cl:nil)
+   (wheel_2_success
+    :reader wheel_2_success
+    :initarg :wheel_2_success
+    :type cl:boolean
+    :initform cl:nil)
+   (wheel_3_success
+    :reader wheel_3_success
+    :initarg :wheel_3_success
+    :type cl:boolean
+    :initform cl:nil)
+   (wheel_4_success
+    :reader wheel_4_success
+    :initarg :wheel_4_success
+    :type cl:boolean
+    :initform cl:nil))
 )
 
 (cl:defclass SensorsData (<SensorsData>)
@@ -66,6 +86,26 @@
 (cl:defmethod servo_cnt-val ((m <SensorsData>))
   (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ros_self_driving_car-msg:servo_cnt-val is deprecated.  Use ros_self_driving_car-msg:servo_cnt instead.")
   (servo_cnt m))
+
+(cl:ensure-generic-function 'wheel_1_success-val :lambda-list '(m))
+(cl:defmethod wheel_1_success-val ((m <SensorsData>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ros_self_driving_car-msg:wheel_1_success-val is deprecated.  Use ros_self_driving_car-msg:wheel_1_success instead.")
+  (wheel_1_success m))
+
+(cl:ensure-generic-function 'wheel_2_success-val :lambda-list '(m))
+(cl:defmethod wheel_2_success-val ((m <SensorsData>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ros_self_driving_car-msg:wheel_2_success-val is deprecated.  Use ros_self_driving_car-msg:wheel_2_success instead.")
+  (wheel_2_success m))
+
+(cl:ensure-generic-function 'wheel_3_success-val :lambda-list '(m))
+(cl:defmethod wheel_3_success-val ((m <SensorsData>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ros_self_driving_car-msg:wheel_3_success-val is deprecated.  Use ros_self_driving_car-msg:wheel_3_success instead.")
+  (wheel_3_success m))
+
+(cl:ensure-generic-function 'wheel_4_success-val :lambda-list '(m))
+(cl:defmethod wheel_4_success-val ((m <SensorsData>))
+  (roslisp-msg-protocol:msg-deprecation-warning "Using old-style slot reader ros_self_driving_car-msg:wheel_4_success-val is deprecated.  Use ros_self_driving_car-msg:wheel_4_success instead.")
+  (wheel_4_success m))
 (cl:defmethod roslisp-msg-protocol:serialize ((msg <SensorsData>) ostream)
   "Serializes a message object of type '<SensorsData>"
   (cl:let ((__ros_str_len (cl:length (cl:slot-value msg 'op_mode))))
@@ -90,6 +130,10 @@
   (cl:write-byte (cl:ldb (cl:byte 8 8) (cl:slot-value msg 'servo_cnt)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 16) (cl:slot-value msg 'servo_cnt)) ostream)
   (cl:write-byte (cl:ldb (cl:byte 8 24) (cl:slot-value msg 'servo_cnt)) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'wheel_1_success) 1 0)) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'wheel_2_success) 1 0)) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'wheel_3_success) 1 0)) ostream)
+  (cl:write-byte (cl:ldb (cl:byte 8 0) (cl:if (cl:slot-value msg 'wheel_4_success) 1 0)) ostream)
 )
 (cl:defmethod roslisp-msg-protocol:deserialize ((msg <SensorsData>) istream)
   "Deserializes a message object of type '<SensorsData>"
@@ -117,6 +161,10 @@
     (cl:setf (cl:ldb (cl:byte 8 8) (cl:slot-value msg 'servo_cnt)) (cl:read-byte istream))
     (cl:setf (cl:ldb (cl:byte 8 16) (cl:slot-value msg 'servo_cnt)) (cl:read-byte istream))
     (cl:setf (cl:ldb (cl:byte 8 24) (cl:slot-value msg 'servo_cnt)) (cl:read-byte istream))
+    (cl:setf (cl:slot-value msg 'wheel_1_success) (cl:not (cl:zerop (cl:read-byte istream))))
+    (cl:setf (cl:slot-value msg 'wheel_2_success) (cl:not (cl:zerop (cl:read-byte istream))))
+    (cl:setf (cl:slot-value msg 'wheel_3_success) (cl:not (cl:zerop (cl:read-byte istream))))
+    (cl:setf (cl:slot-value msg 'wheel_4_success) (cl:not (cl:zerop (cl:read-byte istream))))
   msg
 )
 (cl:defmethod roslisp-msg-protocol:ros-datatype ((msg (cl:eql '<SensorsData>)))
@@ -127,16 +175,16 @@
   "ros_self_driving_car/SensorsData")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql '<SensorsData>)))
   "Returns md5sum for a message object of type '<SensorsData>"
-  "f03b55dfb7ed838621525bc6021ad49d")
+  "e00fea77b9600c9d4424dbbf41aef137")
 (cl:defmethod roslisp-msg-protocol:md5sum ((type (cl:eql 'SensorsData)))
   "Returns md5sum for a message object of type 'SensorsData"
-  "f03b55dfb7ed838621525bc6021ad49d")
+  "e00fea77b9600c9d4424dbbf41aef137")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<SensorsData>)))
   "Returns full string definition for message of type '<SensorsData>"
-  (cl:format cl:nil "string op_mode~%uint32 speed~%uint32 angle~%uint32 motor_cnt~%uint32 servo_cnt~%~%~%"))
+  (cl:format cl:nil "string op_mode~%uint32 speed~%uint32 angle~%uint32 motor_cnt~%uint32 servo_cnt~%bool wheel_1_success~%bool wheel_2_success~%bool wheel_3_success~%bool wheel_4_success~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'SensorsData)))
   "Returns full string definition for message of type 'SensorsData"
-  (cl:format cl:nil "string op_mode~%uint32 speed~%uint32 angle~%uint32 motor_cnt~%uint32 servo_cnt~%~%~%"))
+  (cl:format cl:nil "string op_mode~%uint32 speed~%uint32 angle~%uint32 motor_cnt~%uint32 servo_cnt~%bool wheel_1_success~%bool wheel_2_success~%bool wheel_3_success~%bool wheel_4_success~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <SensorsData>))
   (cl:+ 0
      4 (cl:length (cl:slot-value msg 'op_mode))
@@ -144,6 +192,10 @@
      4
      4
      4
+     1
+     1
+     1
+     1
 ))
 (cl:defmethod roslisp-msg-protocol:ros-message-to-list ((msg <SensorsData>))
   "Converts a ROS message object to a list"
@@ -153,4 +205,8 @@
     (cl:cons ':angle (angle msg))
     (cl:cons ':motor_cnt (motor_cnt msg))
     (cl:cons ':servo_cnt (servo_cnt msg))
+    (cl:cons ':wheel_1_success (wheel_1_success msg))
+    (cl:cons ':wheel_2_success (wheel_2_success msg))
+    (cl:cons ':wheel_3_success (wheel_3_success msg))
+    (cl:cons ':wheel_4_success (wheel_4_success msg))
 ))

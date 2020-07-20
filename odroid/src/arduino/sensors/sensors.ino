@@ -19,29 +19,34 @@ volatile bool ENCODER2_STATE = LOW;
 volatile bool ENCODER3_STATE = LOW;
 volatile bool ENCODER4_STATE = LOW;
 
-volatile unsigned long ENCODER1_CNT = 0;
-volatile unsigned long ENCODER2_CNT = 0;
-volatile unsigned long ENCODER3_CNT = 0;
-volatile unsigned long ENCODER4_CNT = 0;
+volatile unsigned int PREV_ENCODER1_CNT = 0;
+volatile unsigned int PREV_ENCODER2_CNT = 0;
+volatile unsigned int PREV_ENCODER3_CNT = 0;
+volatile unsigned int PREV_ENCODER4_CNT = 0;
+
+volatile unsigned int ENCODER1_CNT = 0;
+volatile unsigned int ENCODER2_CNT = 0;
+volatile unsigned int ENCODER3_CNT = 0;
+volatile unsigned int ENCODER4_CNT = 0;
 
 volatile unsigned int SPEED = 0;
-volatile unsigned int WHEEL1_SPEED = 0;
-volatile unsigned int WHEEL2_SPEED = 0;
-volatile unsigned int WHEEL3_SPEED = 0;
-volatile unsigned int WHEEL4_SPEED = 0;
+volatile float WHEEL1_SPEED = 0;
+volatile float WHEEL2_SPEED = 0;
+volatile float WHEEL3_SPEED = 0;
+volatile float WHEEL4_SPEED = 0;
 
 volatile unsigned int WHEEL1_MEAS_SUCCESS = 0;
 volatile unsigned int WHEEL2_MEAS_SUCCESS = 0;
 volatile unsigned int WHEEL3_MEAS_SUCCESS = 0;
 volatile unsigned int WHEEL4_MEAS_SUCCESS = 0;
 
-const float WHEEL_RADIUS = 5.25;
+const float WHEEL_RADIUS_CM = 5.25;
 const float ENCODER_COUNT_TO_WHEEL_TURNS_CONST = 20.0;
 
 const float ANGLE_CONV_ADD_CONST  = 164.23;
 const float ANGLE_CONV_PROD_CONST = -0.0518;
 
-const    unsigned int SAMPLING_PERIOD_MS = 500;
+const    unsigned int SAMPLING_PERIOD_MS = 100;
 volatile unsigned int TIMER_ELAPSED_MS   = 0;
 
 const unsigned long BAUD_RATE = 2000000;
@@ -53,10 +58,14 @@ const    bool AUTO_MODE = HIGH;
 volatile bool OPERATING_MODE;
 
 volatile unsigned int PREV_SERVO_TIMER;
-volatile unsigned int MEAS_SERVO_COUNT;
+volatile unsigned int MEAS_SERVO_COUNT = 0;
+volatile unsigned int NEW_MEAS_SERVO_COUNT;
 
 volatile unsigned int PREV_MOTOR_TIMER;
-volatile unsigned int MEAS_MOTOR_COUNT;
+volatile unsigned int MEAS_MOTOR_COUNT = 0;
+volatile unsigned int NEW_MEAS_MOTOR_COUNT;
+
+volatile unsigned int OFF_COUNT = 0;
 
 void setup() {
   pinMode(DEBUG_PIN, INPUT);
@@ -91,17 +100,14 @@ void loop() {
 void serialEvent(){
   while(Serial.available()) Serial.read();
 
-  MEAS_MOTOR_COUNT = MEAS_MOTOR_COUNT > 2500 ? 0 : MEAS_MOTOR_COUNT;
-  MEAS_SERVO_COUNT = MEAS_SERVO_COUNT > 2500 ? 0 : MEAS_SERVO_COUNT;
+  MEAS_MOTOR_COUNT = NEW_MEAS_MOTOR_COUNT > 2000 ? MEAS_MOTOR_COUNT : NEW_MEAS_MOTOR_COUNT;
+  MEAS_SERVO_COUNT = NEW_MEAS_SERVO_COUNT > 2000 ? MEAS_SERVO_COUNT : NEW_MEAS_SERVO_COUNT;
 
   int ANGLE = MEAS_SERVO_COUNT != 0 ? int(ANGLE_CONV_PROD_CONST * (MEAS_SERVO_COUNT) + ANGLE_CONV_ADD_CONST) : 0;
 
   char str[150];
-  sprintf(str, "%c %d %d %d %d %d %d %d %d", OPERATING_MODE == AUTO_MODE ? 'A' : 'M', SPEED, ANGLE, MEAS_MOTOR_COUNT, MEAS_SERVO_COUNT, WHEEL1_MEAS_SUCCESS, WHEEL2_MEAS_SUCCESS, WHEEL3_MEAS_SUCCESS, WHEEL4_MEAS_SUCCESS);
+  sprintf(str, "%s %d %d %d %d %d %d %d %d", OPERATING_MODE == AUTO_MODE ? "A" : "M", SPEED, ANGLE, MEAS_MOTOR_COUNT, MEAS_SERVO_COUNT, WHEEL1_MEAS_SUCCESS, WHEEL2_MEAS_SUCCESS, WHEEL3_MEAS_SUCCESS, WHEEL4_MEAS_SUCCESS);
   Serial.println(str);
-
-  MEAS_SERVO_COUNT = 0;
-  MEAS_MOTOR_COUNT = 0;
 }
 
 void send_i2c_speed_message(){
@@ -117,8 +123,8 @@ void send_i2c_speed_message(){
   I2C_SEND = false;
 }
 
-int get_wheel_speed(long encoder_cnt) {
-  return (WHEEL_RADIUS * 2.0 * PI * ((float)encoder_cnt / ENCODER_COUNT_TO_WHEEL_TURNS_CONST)) / ((float)SAMPLING_PERIOD_MS / 1000.0);
+float get_wheel_speed(unsigned int encoder_cnt) {
+  return((WHEEL_RADIUS_CM * 2.0 * PI) * (float)encoder_cnt / ENCODER_COUNT_TO_WHEEL_TURNS_CONST) / ((float)SAMPLING_PERIOD_MS / 1000.0);
 }
 
 ISR(TIMER2_COMPA_vect){
@@ -126,24 +132,31 @@ ISR(TIMER2_COMPA_vect){
 
   if(TIMER_ELAPSED_MS == SAMPLING_PERIOD_MS) {
 
-    WHEEL1_MEAS_SUCCESS = ENCODER1_CNT != 0 ? 1 : 0;
-    WHEEL2_MEAS_SUCCESS = ENCODER2_CNT != 0 ? 1 : 0;
-    WHEEL3_MEAS_SUCCESS = ENCODER3_CNT != 0 ? 1 : 0;
-    WHEEL4_MEAS_SUCCESS = ENCODER4_CNT != 0 ? 1 : 0;
+    unsigned int encoder1_cnt = ENCODER1_CNT - PREV_ENCODER1_CNT;
+    unsigned int encoder2_cnt = ENCODER2_CNT - PREV_ENCODER2_CNT;
+    unsigned int encoder3_cnt = ENCODER3_CNT - PREV_ENCODER3_CNT;
+    unsigned int encoder4_cnt = ENCODER4_CNT - PREV_ENCODER4_CNT;
+
+    WHEEL1_MEAS_SUCCESS = encoder1_cnt != 0 ? 1 : 0;
+    WHEEL2_MEAS_SUCCESS = encoder2_cnt != 0 ? 1 : 0;
+    WHEEL3_MEAS_SUCCESS = encoder3_cnt != 0 ? 1 : 0;
+    WHEEL4_MEAS_SUCCESS = encoder4_cnt != 0 ? 1 : 0;
+
+    digitalWrite(LED_BUILTIN, WHEEL1_MEAS_SUCCESS && WHEEL2_MEAS_SUCCESS && WHEEL3_MEAS_SUCCESS && WHEEL4_MEAS_SUCCESS);
 
     unsigned int WHEEL_SUCCESS_MEAS_CNT = WHEEL1_MEAS_SUCCESS + WHEEL2_MEAS_SUCCESS + WHEEL3_MEAS_SUCCESS + WHEEL4_MEAS_SUCCESS;
 
-    WHEEL1_SPEED = ENCODER1_CNT != 0 ? get_wheel_speed(ENCODER1_CNT) : 0;
-    WHEEL2_SPEED = ENCODER2_CNT != 0 ? get_wheel_speed(ENCODER2_CNT) : 0;
-    WHEEL3_SPEED = ENCODER3_CNT != 0 ? get_wheel_speed(ENCODER3_CNT) : 0;
-    WHEEL4_SPEED = ENCODER4_CNT != 0 ? get_wheel_speed(ENCODER4_CNT) : 0;
+    WHEEL1_SPEED = encoder1_cnt != 0 ? get_wheel_speed(encoder1_cnt) : 0.0;
+    WHEEL2_SPEED = encoder2_cnt != 0 ? get_wheel_speed(encoder2_cnt) : 0.0;
+    WHEEL3_SPEED = encoder3_cnt != 0 ? get_wheel_speed(encoder3_cnt) : 0.0;
+    WHEEL4_SPEED = encoder4_cnt != 0 ? get_wheel_speed(encoder4_cnt) : 0.0;
 
-    SPEED = WHEEL_SUCCESS_MEAS_CNT > 0 ? (WHEEL1_SPEED + WHEEL2_SPEED + WHEEL3_SPEED + WHEEL4_SPEED) / WHEEL_SUCCESS_MEAS_CNT : 0;
+    SPEED = WHEEL_SUCCESS_MEAS_CNT > 0 ? (WHEEL1_SPEED + WHEEL2_SPEED + WHEEL3_SPEED + WHEEL4_SPEED) / (float) WHEEL_SUCCESS_MEAS_CNT : 0.0;
 
-    ENCODER1_CNT = 0;
-    ENCODER2_CNT = 0;
-    ENCODER3_CNT = 0;
-    ENCODER4_CNT = 0;
+    PREV_ENCODER1_CNT = ENCODER1_CNT;
+    PREV_ENCODER2_CNT = ENCODER2_CNT;
+    PREV_ENCODER3_CNT = ENCODER3_CNT;
+    PREV_ENCODER4_CNT = ENCODER4_CNT;
 
     I2C_SEND = true;
 
@@ -177,7 +190,7 @@ ISR(PCINT0_vect) {
       PREV_SERVO_TIMER = CURR_TIMER;
     }
     else{
-      MEAS_SERVO_COUNT = CURR_TIMER - PREV_SERVO_TIMER;
+      NEW_MEAS_SERVO_COUNT = CURR_TIMER - PREV_SERVO_TIMER;
       PREV_SERVO_TIMER = 0;
     }
     SERVO_STATE = !SERVO_STATE;
@@ -187,7 +200,7 @@ ISR(PCINT0_vect) {
       PREV_MOTOR_TIMER = CURR_TIMER;
     }
     else{
-      MEAS_MOTOR_COUNT = CURR_TIMER - PREV_MOTOR_TIMER;
+      NEW_MEAS_MOTOR_COUNT = CURR_TIMER - PREV_MOTOR_TIMER;
       PREV_MOTOR_TIMER = 0;
     }
     MOTOR_STATE = !MOTOR_STATE;
@@ -216,3 +229,5 @@ void init_pin_change_interrupt(){
 void set_operating_mode(){
   OPERATING_MODE = (PIND & B00000100);
 }
+
+

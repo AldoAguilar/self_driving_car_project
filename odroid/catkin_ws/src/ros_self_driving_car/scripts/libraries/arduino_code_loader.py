@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+import rospy
 import os
 import errno
 import serial

@@ -17,7 +17,7 @@ SERIAL_PORT_NAMES_PATH = CONFIG_PATH + "/serial_port_names.txt"
 READ_CMD_MSG = "GET\r\n"
 
 class sensors_driver:
-    def __init__(self, log_enable = False, driver_delay = 0.05, serial_port = None, validate = True):
+    def __init__(self, log_enable = False, driver_delay = 0.05, serial_port = None):
         self.__log_enable = log_enable
         if not os.path.exists(SOURCES_PATH):
             self.__log("ERROR: Self Driving Car Sources Directory was not found!")
@@ -34,12 +34,12 @@ class sensors_driver:
         self.__serial_port = serial_port
         self.__serial = None
 
-        self.__init(validate)
+        self.__init()
 
-    def __init(self, validate):
+    def __init(self):
         if self.__serial_port is None: self.__tryGetSensorsSerialPortName()
         self.__trySetSerialConnection()
-        if validate: self.__validateCodeType()
+        # self.__validateCodeType()
 
     def __log(self, log_message):
         if self.__log_enable:
@@ -69,28 +69,32 @@ class sensors_driver:
             self.__log("ERROR: Failed to establish Serial Connection.")
             raise
 
-    def __validateCodeType(self):
-        self.__log("Verifying Correct Code Type for selected port.")
-        upload_debug_value = int(self.__serial.readline().decode("utf-8").strip())
-        if upload_debug_value != SENSORS_DEBUG_VALUE:
-            self.__log("ERROR: Wrong Code Type for selected port. (Check that the configured Serial Port for the Sensors driver is correct!)")
-            raise RuntimeError('Wrong Code Type for selected port ' + self.__serial_port)
-        self.__log("Success validating Code Type for selected port.")
+    # def __validateCodeType(self):
+    #     self.__log("Verifying Correct Code Type for selected port.")
+    #     upload_debug_value = int(self.__serial.readline().decode("utf-8").strip())
+    #     if upload_debug_value != SENSORS_DEBUG_VALUE:
+    #         self.__log("ERROR: Wrong Code Type for selected port. (Check that the configured Serial Port for the Sensors driver is correct!)")
+    #         raise RuntimeError('Wrong Code Type for selected port ' + self.__serial_port)
+    #     self.__log("Success validating Code Type for selected port.")
 
     def getSensoredData(self):
         try:
             sensored_data_dict = dict()
             time.sleep(self.__driver_delay)
             self.__serial.write(str.encode(READ_CMD_MSG))
-            sensored_data = self.__serial.readline().decode('unicode-escape').strip().split()
+            sensored_data = self.__serial.readline().decode('ascii').strip().split()
             sensored_data_msg = 0
             if len(sensored_data) != 1:
                 sensored_data_msg = SensorsData()
-                sensored_data_msg.op_mode = sensored_data[0]
+                sensored_data_msg.op_mode = str(sensored_data[0])
                 sensored_data_msg.speed = int(sensored_data[1])
                 sensored_data_msg.angle = int(sensored_data[2])
                 sensored_data_msg.motor_cnt = int(sensored_data[3])
                 sensored_data_msg.servo_cnt = int(sensored_data[4])
+                sensored_data_msg.wheel_1_success = bool(int(sensored_data[5]))
+                sensored_data_msg.wheel_2_success = bool(int(sensored_data[6]))
+                sensored_data_msg.wheel_3_success = bool(int(sensored_data[7]))
+                sensored_data_msg.wheel_4_success = bool(int(sensored_data[8]))
             return sensored_data_msg
         except Exception as e:
             self.__log("ERROR: Failed to get sensored data.")

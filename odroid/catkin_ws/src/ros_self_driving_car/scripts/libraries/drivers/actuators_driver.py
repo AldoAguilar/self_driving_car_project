@@ -38,7 +38,7 @@ class actuators_driver:
     def __init(self):
         if self.__serial_port is None: self.__tryGetActuatorsSerialPortName()
         self.__trySetSerialConnection()
-        self.__validateCodeType()
+        # self.__validateCodeType()
 
     def __log(self, log_message):
         if self.__log_enable:
@@ -68,13 +68,13 @@ class actuators_driver:
             self.__log("ERROR: Failed to establish Serial Connection.")
             raise
 
-    def __validateCodeType(self):
-        self.__log("Verifying Correct Code Type for selected port.")
-        upload_debug_value = int(self.__serial.readline().decode("utf-8").strip())
-        if upload_debug_value != ACTUATOR_DEBUG_VALUE:
-            self.__log("ERROR: Wrong Code Type for selected port. (Check that the configured Serial Port for the Actuators driver is correct!)")
-            raise RuntimeError('Wrong Code Type for selected port ' + self.__serial_port)
-        self.__log("Success validating Code Type for selected port.")
+    # def __validateCodeType(self):
+    #     self.__log("Verifying Correct Code Type for selected port.")
+    #     upload_debug_value = int(self.__serial.readline().decode("utf-8").strip())
+    #     if upload_debug_value != ACTUATOR_DEBUG_VALUE:
+    #         self.__log("ERROR: Wrong Code Type for selected port. (Check that the configured Serial Port for the Actuators driver is correct!)")
+    #         raise RuntimeError('Wrong Code Type for selected port ' + self.__serial_port)
+    #     self.__log("Success validating Code Type for selected port.")
 
     def sendCommandData(self, speed, angle):
         try:

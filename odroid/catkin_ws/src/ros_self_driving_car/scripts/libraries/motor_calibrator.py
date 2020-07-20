@@ -1,8 +1,9 @@
+#!/usr/bin/env python
+import rospy
 import os
 import errno
 import time
 import serial
-from ros_self_driving_car.msg import SensorsData
 from datetime import datetime
 from arduino_code_loader import arduino_code_loader
 from drivers.sensors_driver import sensors_driver
@@ -12,11 +13,9 @@ SOURCES_PATH = os.path.expanduser("~") + "/self_driving_car_project/odroid/src"
 
 ARDUINO_PROJECT_PATH = SOURCES_PATH +  "/arduino"
 ACTUATORS_CODE_PATH = ARDUINO_PROJECT_PATH + "/actuators/actuators.ino"
-ACTUATOS_CODE_BCK_PATH = ARDUINO_PROJECT_PATH + "/actuators/.actuators_backup.txt"
 
-TEST_DELAY = 0.5
 CALIBRATION_TIME = 5
-TESTING_CNT_CONDITION = 11;
+TEST_CONST = 11;
 
 class motor_calibrator:
     def __init__(self, log_enable = False):
@@ -103,7 +102,7 @@ class motor_calibrator:
             SERVO_MAX_CNT = max([SERVO_RIGHT_CNT, SERVO_LEFT_CNT])
 
             self.__log("Storing Configured Callibration Values to '" + ACTUATORS_CODE_PATH + "'.")
-            with open(ACTUATOS_CODE_BCK_PATH , "r") as f:lines = f.readlines()
+            with open(ACTUATORS_CODE_PATH , "r") as f: lines = f.readlines()
             cnt = 0
             for id in range(len(lines)):
                 if cnt == 5: break
@@ -115,7 +114,7 @@ class motor_calibrator:
                     lines[id] = "const unsigned int SERVO_IDLE_CNT = " + str(SERVO_IDLE_CNT) +";\n"
                     cnt = cnt + 1
                 elif all(word in line  for word in "const unsigned int MOTOR_MIN_CNT".split()):
-                    lines[id] = "const unsigned int MOTOR_MIN_CNT  = " + str(MOTOR_MIN_CNT - 15) +";\n"
+                    lines[id] = "const unsigned int MOTOR_MIN_CNT  = " + str(MOTOR_MIN_CNT) +";\n"
                     cnt = cnt + 1
                 elif all(word in line  for word in "const unsigned int SERVO_MIN_CNT".split()):
                     lines[id] = "const unsigned int SERVO_MIN_CNT  = " + str(SERVO_MIN_CNT) +";\n"
@@ -139,5 +138,5 @@ class motor_calibrator:
     def test(self):
         self.__validateInitialConditions(test = True)
         self.__log("Starting callibration testing process.")
-        self.__actuators_driver.sendCommandData(TESTING_CNT_CONDITION, TESTING_CNT_CONDITION)
+        self.__actuators_driver.sendCommandData(TEST_CONST, TEST_CONST)
         self.__log("Success running callibration testing process.")

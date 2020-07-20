@@ -23,6 +23,10 @@ class SensorsData {
       this.angle = null;
       this.motor_cnt = null;
       this.servo_cnt = null;
+      this.wheel_1_success = null;
+      this.wheel_2_success = null;
+      this.wheel_3_success = null;
+      this.wheel_4_success = null;
     }
     else {
       if (initObj.hasOwnProperty('op_mode')) {
@@ -55,6 +59,30 @@ class SensorsData {
       else {
         this.servo_cnt = 0;
       }
+      if (initObj.hasOwnProperty('wheel_1_success')) {
+        this.wheel_1_success = initObj.wheel_1_success
+      }
+      else {
+        this.wheel_1_success = false;
+      }
+      if (initObj.hasOwnProperty('wheel_2_success')) {
+        this.wheel_2_success = initObj.wheel_2_success
+      }
+      else {
+        this.wheel_2_success = false;
+      }
+      if (initObj.hasOwnProperty('wheel_3_success')) {
+        this.wheel_3_success = initObj.wheel_3_success
+      }
+      else {
+        this.wheel_3_success = false;
+      }
+      if (initObj.hasOwnProperty('wheel_4_success')) {
+        this.wheel_4_success = initObj.wheel_4_success
+      }
+      else {
+        this.wheel_4_success = false;
+      }
     }
   }
 
@@ -70,6 +98,14 @@ class SensorsData {
     bufferOffset = _serializer.uint32(obj.motor_cnt, buffer, bufferOffset);
     // Serialize message field [servo_cnt]
     bufferOffset = _serializer.uint32(obj.servo_cnt, buffer, bufferOffset);
+    // Serialize message field [wheel_1_success]
+    bufferOffset = _serializer.bool(obj.wheel_1_success, buffer, bufferOffset);
+    // Serialize message field [wheel_2_success]
+    bufferOffset = _serializer.bool(obj.wheel_2_success, buffer, bufferOffset);
+    // Serialize message field [wheel_3_success]
+    bufferOffset = _serializer.bool(obj.wheel_3_success, buffer, bufferOffset);
+    // Serialize message field [wheel_4_success]
+    bufferOffset = _serializer.bool(obj.wheel_4_success, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -87,13 +123,21 @@ class SensorsData {
     data.motor_cnt = _deserializer.uint32(buffer, bufferOffset);
     // Deserialize message field [servo_cnt]
     data.servo_cnt = _deserializer.uint32(buffer, bufferOffset);
+    // Deserialize message field [wheel_1_success]
+    data.wheel_1_success = _deserializer.bool(buffer, bufferOffset);
+    // Deserialize message field [wheel_2_success]
+    data.wheel_2_success = _deserializer.bool(buffer, bufferOffset);
+    // Deserialize message field [wheel_3_success]
+    data.wheel_3_success = _deserializer.bool(buffer, bufferOffset);
+    // Deserialize message field [wheel_4_success]
+    data.wheel_4_success = _deserializer.bool(buffer, bufferOffset);
     return data;
   }
 
   static getMessageSize(object) {
     let length = 0;
     length += object.op_mode.length;
-    return length + 20;
+    return length + 24;
   }
 
   static datatype() {
@@ -103,7 +147,7 @@ class SensorsData {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'f03b55dfb7ed838621525bc6021ad49d';
+    return 'e00fea77b9600c9d4424dbbf41aef137';
   }
 
   static messageDefinition() {
@@ -114,6 +158,10 @@ class SensorsData {
     uint32 angle
     uint32 motor_cnt
     uint32 servo_cnt
+    bool wheel_1_success
+    bool wheel_2_success
+    bool wheel_3_success
+    bool wheel_4_success
     
     `;
   }
@@ -157,6 +205,34 @@ class SensorsData {
     }
     else {
       resolved.servo_cnt = 0
+    }
+
+    if (msg.wheel_1_success !== undefined) {
+      resolved.wheel_1_success = msg.wheel_1_success;
+    }
+    else {
+      resolved.wheel_1_success = false
+    }
+
+    if (msg.wheel_2_success !== undefined) {
+      resolved.wheel_2_success = msg.wheel_2_success;
+    }
+    else {
+      resolved.wheel_2_success = false
+    }
+
+    if (msg.wheel_3_success !== undefined) {
+      resolved.wheel_3_success = msg.wheel_3_success;
+    }
+    else {
+      resolved.wheel_3_success = false
+    }
+
+    if (msg.wheel_4_success !== undefined) {
+      resolved.wheel_4_success = msg.wheel_4_success;
+    }
+    else {
+      resolved.wheel_4_success = false
     }
 
     return resolved;
