@@ -55,9 +55,7 @@ include ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_c
 
 ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsData.h
 ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/SensorsData.h
-ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/CalibrateDrivers.h
-ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/TestDriversCalibration.h
-ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/LoadArduinoCode.h
+ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsCommandData.h
 
 
 /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsData.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
@@ -72,33 +70,16 @@ ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp: /hom
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/odroid/self_driving_car_project/odroid/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating C++ code from ros_self_driving_car/SensorsData.msg"
 	cd /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car && /home/odroid/self_driving_car_project/odroid/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg -Iros_self_driving_car:/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p ros_self_driving_car -o /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car -e /opt/ros/melodic/share/gencpp/cmake/..
 
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/CalibrateDrivers.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/CalibrateDrivers.h: /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/CalibrateDrivers.h: /opt/ros/melodic/share/gencpp/msg.h.template
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/CalibrateDrivers.h: /opt/ros/melodic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/odroid/self_driving_car_project/odroid/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from ros_self_driving_car/CalibrateDrivers.srv"
-	cd /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car && /home/odroid/self_driving_car_project/odroid/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv -Iros_self_driving_car:/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p ros_self_driving_car -o /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car -e /opt/ros/melodic/share/gencpp/cmake/..
-
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/TestDriversCalibration.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/TestDriversCalibration.h: /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/TestDriversCalibration.h: /opt/ros/melodic/share/gencpp/msg.h.template
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/TestDriversCalibration.h: /opt/ros/melodic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/odroid/self_driving_car_project/odroid/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating C++ code from ros_self_driving_car/TestDriversCalibration.srv"
-	cd /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car && /home/odroid/self_driving_car_project/odroid/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv -Iros_self_driving_car:/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p ros_self_driving_car -o /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car -e /opt/ros/melodic/share/gencpp/cmake/..
-
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/LoadArduinoCode.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/LoadArduinoCode.h: /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/LoadArduinoCode.h: /opt/ros/melodic/share/gencpp/msg.h.template
-/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/LoadArduinoCode.h: /opt/ros/melodic/share/gencpp/srv.h.template
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/odroid/self_driving_car_project/odroid/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating C++ code from ros_self_driving_car/LoadArduinoCode.srv"
-	cd /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car && /home/odroid/self_driving_car_project/odroid/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv -Iros_self_driving_car:/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p ros_self_driving_car -o /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car -e /opt/ros/melodic/share/gencpp/cmake/..
+/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsCommandData.h: /opt/ros/melodic/lib/gencpp/gen_cpp.py
+/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsCommandData.h: /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsCommandData.msg
+/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsCommandData.h: /opt/ros/melodic/share/gencpp/msg.h.template
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/odroid/self_driving_car_project/odroid/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating C++ code from ros_self_driving_car/ActuatorsCommandData.msg"
+	cd /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car && /home/odroid/self_driving_car_project/odroid/catkin_ws/build/catkin_generated/env_cached.sh /usr/bin/python2 /opt/ros/melodic/share/gencpp/cmake/../../../lib/gencpp/gen_cpp.py /home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsCommandData.msg -Iros_self_driving_car:/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg -Istd_msgs:/opt/ros/melodic/share/std_msgs/cmake/../msg -p ros_self_driving_car -o /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car -e /opt/ros/melodic/share/gencpp/cmake/..
 
 ros_self_driving_car_generate_messages_cpp: ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp
 ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsData.h
 ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/SensorsData.h
-ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/CalibrateDrivers.h
-ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/TestDriversCalibration.h
-ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/LoadArduinoCode.h
+ros_self_driving_car_generate_messages_cpp: /home/odroid/self_driving_car_project/odroid/catkin_ws/devel/include/ros_self_driving_car/ActuatorsCommandData.h
 ros_self_driving_car_generate_messages_cpp: ros_self_driving_car/CMakeFiles/ros_self_driving_car_generate_messages_cpp.dir/build.make
 
 .PHONY : ros_self_driving_car_generate_messages_cpp

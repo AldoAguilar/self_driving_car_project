@@ -24,22 +24,22 @@ struct ActuatorsData_
   typedef ActuatorsData_<ContainerAllocator> Type;
 
   ActuatorsData_()
-    : speed(0)
-    , angle(0)  {
+    : motor_cnt(0)
+    , servo_cnt(0)  {
     }
   ActuatorsData_(const ContainerAllocator& _alloc)
-    : speed(0)
-    , angle(0)  {
+    : motor_cnt(0)
+    , servo_cnt(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef uint32_t _speed_type;
-  _speed_type speed;
+   typedef uint32_t _motor_cnt_type;
+  _motor_cnt_type motor_cnt;
 
-   typedef uint32_t _angle_type;
-  _angle_type angle;
+   typedef uint32_t _servo_cnt_type;
+  _servo_cnt_type servo_cnt;
 
 
 
@@ -70,8 +70,8 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::ros_self_driving_car::ActuatorsData_<ContainerAllocator1> & lhs, const ::ros_self_driving_car::ActuatorsData_<ContainerAllocator2> & rhs)
 {
-  return lhs.speed == rhs.speed &&
-    lhs.angle == rhs.angle;
+  return lhs.motor_cnt == rhs.motor_cnt &&
+    lhs.servo_cnt == rhs.servo_cnt;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -128,12 +128,12 @@ struct MD5Sum< ::ros_self_driving_car::ActuatorsData_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "9caa6924c81cdc9852d0edbb4d6db3f1";
+    return "6b6ed50629e9328ed4596da02266d79d";
   }
 
   static const char* value(const ::ros_self_driving_car::ActuatorsData_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x9caa6924c81cdc98ULL;
-  static const uint64_t static_value2 = 0x52d0edbb4d6db3f1ULL;
+  static const uint64_t static_value1 = 0x6b6ed50629e9328eULL;
+  static const uint64_t static_value2 = 0xd4596da02266d79dULL;
 };
 
 template<class ContainerAllocator>
@@ -152,8 +152,8 @@ struct Definition< ::ros_self_driving_car::ActuatorsData_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "uint32 speed\n"
-"uint32 angle\n"
+    return "uint32 motor_cnt\n"
+"uint32 servo_cnt\n"
 ;
   }
 
@@ -172,8 +172,8 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.speed);
-      stream.next(m.angle);
+      stream.next(m.motor_cnt);
+      stream.next(m.servo_cnt);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -192,10 +192,10 @@ struct Printer< ::ros_self_driving_car::ActuatorsData_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::ros_self_driving_car::ActuatorsData_<ContainerAllocator>& v)
   {
-    s << indent << "speed: ";
-    Printer<uint32_t>::stream(s, indent + "  ", v.speed);
-    s << indent << "angle: ";
-    Printer<uint32_t>::stream(s, indent + "  ", v.angle);
+    s << indent << "motor_cnt: ";
+    Printer<uint32_t>::stream(s, indent + "  ", v.motor_cnt);
+    s << indent << "servo_cnt: ";
+    Printer<uint32_t>::stream(s, indent + "  ", v.servo_cnt);
   }
 };
 

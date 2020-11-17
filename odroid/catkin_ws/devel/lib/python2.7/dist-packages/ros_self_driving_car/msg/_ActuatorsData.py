@@ -7,13 +7,13 @@ import struct
 
 
 class ActuatorsData(genpy.Message):
-  _md5sum = "9caa6924c81cdc9852d0edbb4d6db3f1"
+  _md5sum = "6b6ed50629e9328ed4596da02266d79d"
   _type = "ros_self_driving_car/ActuatorsData"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """uint32 speed
-uint32 angle
+  _full_text = """uint32 motor_cnt
+uint32 servo_cnt
 """
-  __slots__ = ['speed','angle']
+  __slots__ = ['motor_cnt','servo_cnt']
   _slot_types = ['uint32','uint32']
 
   def __init__(self, *args, **kwds):
@@ -24,7 +24,7 @@ uint32 angle
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       speed,angle
+       motor_cnt,servo_cnt
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -33,13 +33,13 @@ uint32 angle
     if args or kwds:
       super(ActuatorsData, self).__init__(*args, **kwds)
       #message fields cannot be None, assign default values for those that are
-      if self.speed is None:
-        self.speed = 0
-      if self.angle is None:
-        self.angle = 0
+      if self.motor_cnt is None:
+        self.motor_cnt = 0
+      if self.servo_cnt is None:
+        self.servo_cnt = 0
     else:
-      self.speed = 0
-      self.angle = 0
+      self.motor_cnt = 0
+      self.servo_cnt = 0
 
   def _get_types(self):
     """
@@ -54,7 +54,7 @@ uint32 angle
     """
     try:
       _x = self
-      buff.write(_get_struct_2I().pack(_x.speed, _x.angle))
+      buff.write(_get_struct_2I().pack(_x.motor_cnt, _x.servo_cnt))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -68,7 +68,7 @@ uint32 angle
       _x = self
       start = end
       end += 8
-      (_x.speed, _x.angle,) = _get_struct_2I().unpack(str[start:end])
+      (_x.motor_cnt, _x.servo_cnt,) = _get_struct_2I().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -82,7 +82,7 @@ uint32 angle
     """
     try:
       _x = self
-      buff.write(_get_struct_2I().pack(_x.speed, _x.angle))
+      buff.write(_get_struct_2I().pack(_x.motor_cnt, _x.servo_cnt))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -97,7 +97,7 @@ uint32 angle
       _x = self
       start = end
       end += 8
-      (_x.speed, _x.angle,) = _get_struct_2I().unpack(str[start:end])
+      (_x.motor_cnt, _x.servo_cnt,) = _get_struct_2I().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill

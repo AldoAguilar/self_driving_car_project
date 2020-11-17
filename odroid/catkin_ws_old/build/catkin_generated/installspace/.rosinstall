@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/odroid/self_driving_car_project/odroid/catkin_ws/install/setup.sh

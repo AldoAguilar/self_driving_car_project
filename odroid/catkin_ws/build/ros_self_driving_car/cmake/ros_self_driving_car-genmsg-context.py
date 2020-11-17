@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
-messages_str = "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg;/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg"
-services_str = "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv;/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv;/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv"
+messages_str = "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg;/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg;/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsCommandData.msg"
+services_str = ""
 pkg_name = "ros_self_driving_car"
 dependencies_str = "std_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

@@ -4,6 +4,7 @@ import time
 import serial
 from datetime import datetime
 from ros_self_driving_car.msg import ActuatorsData
+from ros_self_driving_car.msg import ActuatorsCommandData
 
 BAUD_RATE = 2000000
 
@@ -13,6 +14,8 @@ SOURCES_PATH = os.path.expanduser("~") + "/self_driving_car_project/odroid/src"
 
 CONFIG_PATH = SOURCES_PATH + "/config"
 SERIAL_PORT_NAMES_PATH = CONFIG_PATH + "/serial_port_names.txt"
+
+READ_CMD_MSG = "GET\r\n"
 
 class actuators_driver:
     def __init__(self, log_enable = False, driver_delay = 0.05, serial_port = None):
@@ -82,12 +85,28 @@ class actuators_driver:
             time.sleep(self.__driver_delay)
             self.__serial.write(str.encode(str(speed) + " " + str(angle) + "\r\n"))
             cmd_result_data = self.__serial.readline().decode('unicode-escape').strip().split()
-            actuators_data_msg = 0
+            actuators_command_data_msg = 0
             if len(cmd_result_data) != 1:
-                actuators_data_msg = ActuatorsData()
-                actuators_data_msg.speed = int(cmd_result_data[0])
-                actuators_data_msg.angle = int(cmd_result_data[1])
-            return actuators_data_msg
+                actuators_command_data_msg = ActuatorsCommandData()
+                actuators_command_data_msg.speed = int(cmd_result_data[0])
+                actuators_command_data_msg.angle = int(cmd_result_data[1])
+            return actuators_command_data_msg
         except Exception as e:
             self.__log("ERROR: Failed to send command data (SPEED: " + speed + ", ANGLE: "  + angle + ").")
+            raise
+
+    def getActuatorsData(self):
+        try:
+            actuators_data_dict = dict()
+            time.sleep(self.__driver_delay)
+            self.__serial.write(str.encode(READ_CMD_MSG))
+            actuators_data = self.__serial.readline().decode('ascii').strip().split()
+            actuators_data_msg = 0
+            if len(actuators_data) != 1:
+                actuators_data_msg = ActuatorsData()
+                actuators_data_msg.motor_cnt = int(actuators_data[0])
+                actuators_data_msg.servo_cnt = int(actuators_data[1])
+            return actuators_data_msg
+        except Exception as e:
+            self.__log("ERROR: Failed to get actuators data.")
             raise

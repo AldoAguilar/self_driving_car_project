@@ -2,11 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/ros_self_driving_car_generate_messages_py"
   "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/msg/_ActuatorsData.py"
   "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/msg/_SensorsData.py"
-  "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/srv/_CalibrateDrivers.py"
-  "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/srv/_TestDriversCalibration.py"
-  "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/srv/_LoadArduinoCode.py"
+  "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/msg/_ActuatorsCommandData.py"
   "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/msg/__init__.py"
-  "/home/odroid/self_driving_car_project/odroid/catkin_ws/devel/lib/python2.7/dist-packages/ros_self_driving_car/srv/__init__.py"
 )
 
 # Per-language clean rules from dependency scanning.

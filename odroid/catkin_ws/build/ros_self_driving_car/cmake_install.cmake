@@ -41,14 +41,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_self_driving_car/msg" TYPE FILE FILES
     "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/SensorsData.msg"
     "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsData.msg"
-    )
-endif()
-
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_self_driving_car/srv" TYPE FILE FILES
-    "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/CalibrateDrivers.srv"
-    "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/LoadArduinoCode.srv"
-    "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/srv/TestDriversCalibration.srv"
+    "/home/odroid/self_driving_car_project/odroid/catkin_ws/src/ros_self_driving_car/msg/ActuatorsCommandData.msg"
     )
 endif()
 

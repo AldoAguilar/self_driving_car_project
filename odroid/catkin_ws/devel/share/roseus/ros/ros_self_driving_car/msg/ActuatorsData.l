@@ -14,62 +14,62 @@
 
 (defclass ros_self_driving_car::ActuatorsData
   :super ros::object
-  :slots (_speed _angle ))
+  :slots (_motor_cnt _servo_cnt ))
 
 (defmethod ros_self_driving_car::ActuatorsData
   (:init
    (&key
-    ((:speed __speed) 0)
-    ((:angle __angle) 0)
+    ((:motor_cnt __motor_cnt) 0)
+    ((:servo_cnt __servo_cnt) 0)
     )
    (send-super :init)
-   (setq _speed (round __speed))
-   (setq _angle (round __angle))
+   (setq _motor_cnt (round __motor_cnt))
+   (setq _servo_cnt (round __servo_cnt))
    self)
-  (:speed
-   (&optional __speed)
-   (if __speed (setq _speed __speed)) _speed)
-  (:angle
-   (&optional __angle)
-   (if __angle (setq _angle __angle)) _angle)
+  (:motor_cnt
+   (&optional __motor_cnt)
+   (if __motor_cnt (setq _motor_cnt __motor_cnt)) _motor_cnt)
+  (:servo_cnt
+   (&optional __servo_cnt)
+   (if __servo_cnt (setq _servo_cnt __servo_cnt)) _servo_cnt)
   (:serialization-length
    ()
    (+
-    ;; uint32 _speed
+    ;; uint32 _motor_cnt
     4
-    ;; uint32 _angle
+    ;; uint32 _servo_cnt
     4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; uint32 _speed
-       (write-long _speed s)
-     ;; uint32 _angle
-       (write-long _angle s)
+     ;; uint32 _motor_cnt
+       (write-long _motor_cnt s)
+     ;; uint32 _servo_cnt
+       (write-long _servo_cnt s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; uint32 _speed
-     (setq _speed (sys::peek buf ptr- :integer)) (incf ptr- 4)
-   ;; uint32 _angle
-     (setq _angle (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; uint32 _motor_cnt
+     (setq _motor_cnt (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; uint32 _servo_cnt
+     (setq _servo_cnt (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;;
    self)
   )
 
-(setf (get ros_self_driving_car::ActuatorsData :md5sum-) "9caa6924c81cdc9852d0edbb4d6db3f1")
+(setf (get ros_self_driving_car::ActuatorsData :md5sum-) "6b6ed50629e9328ed4596da02266d79d")
 (setf (get ros_self_driving_car::ActuatorsData :datatype-) "ros_self_driving_car/ActuatorsData")
 (setf (get ros_self_driving_car::ActuatorsData :definition-)
-      "uint32 speed
-uint32 angle
+      "uint32 motor_cnt
+uint32 servo_cnt
 
 ")
 
 
 
-(provide :ros_self_driving_car/ActuatorsData "9caa6924c81cdc9852d0edbb4d6db3f1")
+(provide :ros_self_driving_car/ActuatorsData "6b6ed50629e9328ed4596da02266d79d")
 
 

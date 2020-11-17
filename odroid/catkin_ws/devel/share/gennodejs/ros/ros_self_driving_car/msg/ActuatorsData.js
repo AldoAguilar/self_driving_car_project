@@ -18,31 +18,31 @@ class ActuatorsData {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.speed = null;
-      this.angle = null;
+      this.motor_cnt = null;
+      this.servo_cnt = null;
     }
     else {
-      if (initObj.hasOwnProperty('speed')) {
-        this.speed = initObj.speed
+      if (initObj.hasOwnProperty('motor_cnt')) {
+        this.motor_cnt = initObj.motor_cnt
       }
       else {
-        this.speed = 0;
+        this.motor_cnt = 0;
       }
-      if (initObj.hasOwnProperty('angle')) {
-        this.angle = initObj.angle
+      if (initObj.hasOwnProperty('servo_cnt')) {
+        this.servo_cnt = initObj.servo_cnt
       }
       else {
-        this.angle = 0;
+        this.servo_cnt = 0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type ActuatorsData
-    // Serialize message field [speed]
-    bufferOffset = _serializer.uint32(obj.speed, buffer, bufferOffset);
-    // Serialize message field [angle]
-    bufferOffset = _serializer.uint32(obj.angle, buffer, bufferOffset);
+    // Serialize message field [motor_cnt]
+    bufferOffset = _serializer.uint32(obj.motor_cnt, buffer, bufferOffset);
+    // Serialize message field [servo_cnt]
+    bufferOffset = _serializer.uint32(obj.servo_cnt, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -50,10 +50,10 @@ class ActuatorsData {
     //deserializes a message object of type ActuatorsData
     let len;
     let data = new ActuatorsData(null);
-    // Deserialize message field [speed]
-    data.speed = _deserializer.uint32(buffer, bufferOffset);
-    // Deserialize message field [angle]
-    data.angle = _deserializer.uint32(buffer, bufferOffset);
+    // Deserialize message field [motor_cnt]
+    data.motor_cnt = _deserializer.uint32(buffer, bufferOffset);
+    // Deserialize message field [servo_cnt]
+    data.servo_cnt = _deserializer.uint32(buffer, bufferOffset);
     return data;
   }
 
@@ -68,14 +68,14 @@ class ActuatorsData {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '9caa6924c81cdc9852d0edbb4d6db3f1';
+    return '6b6ed50629e9328ed4596da02266d79d';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    uint32 speed
-    uint32 angle
+    uint32 motor_cnt
+    uint32 servo_cnt
     
     `;
   }
@@ -86,18 +86,18 @@ class ActuatorsData {
       msg = {};
     }
     const resolved = new ActuatorsData(null);
-    if (msg.speed !== undefined) {
-      resolved.speed = msg.speed;
+    if (msg.motor_cnt !== undefined) {
+      resolved.motor_cnt = msg.motor_cnt;
     }
     else {
-      resolved.speed = 0
+      resolved.motor_cnt = 0
     }
 
-    if (msg.angle !== undefined) {
-      resolved.angle = msg.angle;
+    if (msg.servo_cnt !== undefined) {
+      resolved.servo_cnt = msg.servo_cnt;
     }
     else {
-      resolved.angle = 0
+      resolved.servo_cnt = 0
     }
 
     return resolved;
