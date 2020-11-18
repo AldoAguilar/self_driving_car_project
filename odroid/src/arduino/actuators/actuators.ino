@@ -5,7 +5,7 @@ volatile float PID_KI      = 0.22;
 volatile float PID_THRESH  = 100;
 volatile float PID_IE      = 0;
 
-volatile int DESIRED_ANGLE = 90;
+volatile int DESIRED_ANGLE = 0;
 volatile int DESIRED_SPEED = 0;
 volatile int CURRENT_SPEED = 0;
 unsigned int CURRENT_MOTOR_CNT;
@@ -220,8 +220,8 @@ void serialEvent() {
     return;
   }
 
-  unsigned int desired_speed;
-  unsigned int desired_angle;
+  int desired_speed;
+  int desired_angle;
 
   sscanf(command, "%d %d", &desired_speed, &desired_angle);
 

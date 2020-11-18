@@ -52,10 +52,10 @@ struct SensorsData_
    typedef std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other >  _op_mode_type;
   _op_mode_type op_mode;
 
-   typedef uint32_t _speed_type;
+   typedef int32_t _speed_type;
   _speed_type speed;
 
-   typedef uint32_t _angle_type;
+   typedef int32_t _angle_type;
   _angle_type angle;
 
    typedef uint32_t _motor_cnt_type;
@@ -170,12 +170,12 @@ struct MD5Sum< ::ros_self_driving_car::SensorsData_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "e00fea77b9600c9d4424dbbf41aef137";
+    return "ca5a2621c8a00e6fea801ce1abd88ec5";
   }
 
   static const char* value(const ::ros_self_driving_car::SensorsData_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xe00fea77b9600c9dULL;
-  static const uint64_t static_value2 = 0x4424dbbf41aef137ULL;
+  static const uint64_t static_value1 = 0xca5a2621c8a00e6fULL;
+  static const uint64_t static_value2 = 0xea801ce1abd88ec5ULL;
 };
 
 template<class ContainerAllocator>
@@ -195,8 +195,8 @@ struct Definition< ::ros_self_driving_car::SensorsData_<ContainerAllocator> >
   static const char* value()
   {
     return "string op_mode\n"
-"uint32 speed\n"
-"uint32 angle\n"
+"int32 speed\n"
+"int32 angle\n"
 "uint32 motor_cnt\n"
 "uint32 servo_cnt\n"
 "bool wheel_1_success\n"
@@ -251,9 +251,9 @@ struct Printer< ::ros_self_driving_car::SensorsData_<ContainerAllocator> >
     s << indent << "op_mode: ";
     Printer<std::basic_string<char, std::char_traits<char>, typename ContainerAllocator::template rebind<char>::other > >::stream(s, indent + "  ", v.op_mode);
     s << indent << "speed: ";
-    Printer<uint32_t>::stream(s, indent + "  ", v.speed);
+    Printer<int32_t>::stream(s, indent + "  ", v.speed);
     s << indent << "angle: ";
-    Printer<uint32_t>::stream(s, indent + "  ", v.angle);
+    Printer<int32_t>::stream(s, indent + "  ", v.angle);
     s << indent << "motor_cnt: ";
     Printer<uint32_t>::stream(s, indent + "  ", v.motor_cnt);
     s << indent << "servo_cnt: ";

@@ -40,9 +40,9 @@ class ActuatorsCommandData {
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type ActuatorsCommandData
     // Serialize message field [speed]
-    bufferOffset = _serializer.uint32(obj.speed, buffer, bufferOffset);
+    bufferOffset = _serializer.int32(obj.speed, buffer, bufferOffset);
     // Serialize message field [angle]
-    bufferOffset = _serializer.uint32(obj.angle, buffer, bufferOffset);
+    bufferOffset = _serializer.int32(obj.angle, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -51,9 +51,9 @@ class ActuatorsCommandData {
     let len;
     let data = new ActuatorsCommandData(null);
     // Deserialize message field [speed]
-    data.speed = _deserializer.uint32(buffer, bufferOffset);
+    data.speed = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [angle]
-    data.angle = _deserializer.uint32(buffer, bufferOffset);
+    data.angle = _deserializer.int32(buffer, bufferOffset);
     return data;
   }
 
@@ -68,14 +68,14 @@ class ActuatorsCommandData {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '9caa6924c81cdc9852d0edbb4d6db3f1';
+    return '1562a5a885c295584eaf5e0ababaabd7';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    uint32 speed
-    uint32 angle
+    int32 speed
+    int32 angle
     
     `;
   }

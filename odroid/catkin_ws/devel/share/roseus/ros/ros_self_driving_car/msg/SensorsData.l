@@ -72,9 +72,9 @@
    (+
     ;; string _op_mode
     4 (length _op_mode)
-    ;; uint32 _speed
+    ;; int32 _speed
     4
-    ;; uint32 _angle
+    ;; int32 _angle
     4
     ;; uint32 _motor_cnt
     4
@@ -95,9 +95,9 @@
               (make-string-output-stream (send self :serialization-length)))))
      ;; string _op_mode
        (write-long (length _op_mode) s) (princ _op_mode s)
-     ;; uint32 _speed
+     ;; int32 _speed
        (write-long _speed s)
-     ;; uint32 _angle
+     ;; int32 _angle
        (write-long _angle s)
      ;; uint32 _motor_cnt
        (write-long _motor_cnt s)
@@ -117,9 +117,9 @@
    (buf &optional (ptr- 0))
    ;; string _op_mode
      (let (n) (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4) (setq _op_mode (subseq buf ptr- (+ ptr- n))) (incf ptr- n))
-   ;; uint32 _speed
+   ;; int32 _speed
      (setq _speed (sys::peek buf ptr- :integer)) (incf ptr- 4)
-   ;; uint32 _angle
+   ;; int32 _angle
      (setq _angle (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;; uint32 _motor_cnt
      (setq _motor_cnt (sys::peek buf ptr- :integer)) (incf ptr- 4)
@@ -137,12 +137,12 @@
    self)
   )
 
-(setf (get ros_self_driving_car::SensorsData :md5sum-) "e00fea77b9600c9d4424dbbf41aef137")
+(setf (get ros_self_driving_car::SensorsData :md5sum-) "ca5a2621c8a00e6fea801ce1abd88ec5")
 (setf (get ros_self_driving_car::SensorsData :datatype-) "ros_self_driving_car/SensorsData")
 (setf (get ros_self_driving_car::SensorsData :definition-)
       "string op_mode
-uint32 speed
-uint32 angle
+int32 speed
+int32 angle
 uint32 motor_cnt
 uint32 servo_cnt
 bool wheel_1_success
@@ -154,6 +154,6 @@ bool wheel_4_success
 
 
 
-(provide :ros_self_driving_car/SensorsData "e00fea77b9600c9d4424dbbf41aef137")
+(provide :ros_self_driving_car/SensorsData "ca5a2621c8a00e6fea801ce1abd88ec5")
 
 

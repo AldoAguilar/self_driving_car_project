@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export LD_LIBRARY_PATH="/opt/ros/melodic/lib"
-export PKG_CONFIG_PATH="/opt/ros/melodic/lib/pkgconfig"
+export LD_LIBRARY_PATH="/home/odroid/catkin_ws/devel/lib:/opt/ros/melodic/lib"
+export PKG_CONFIG_PATH="/home/odroid/catkin_ws/devel/lib/pkgconfig:/opt/ros/melodic/lib/pkgconfig"
 export PWD="/home/odroid/self_driving_car_project/odroid/catkin_ws/build"
 export PYTHONPATH="/opt/ros/melodic/lib/python2.7/dist-packages"

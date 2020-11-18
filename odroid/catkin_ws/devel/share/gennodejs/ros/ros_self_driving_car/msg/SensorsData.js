@@ -91,9 +91,9 @@ class SensorsData {
     // Serialize message field [op_mode]
     bufferOffset = _serializer.string(obj.op_mode, buffer, bufferOffset);
     // Serialize message field [speed]
-    bufferOffset = _serializer.uint32(obj.speed, buffer, bufferOffset);
+    bufferOffset = _serializer.int32(obj.speed, buffer, bufferOffset);
     // Serialize message field [angle]
-    bufferOffset = _serializer.uint32(obj.angle, buffer, bufferOffset);
+    bufferOffset = _serializer.int32(obj.angle, buffer, bufferOffset);
     // Serialize message field [motor_cnt]
     bufferOffset = _serializer.uint32(obj.motor_cnt, buffer, bufferOffset);
     // Serialize message field [servo_cnt]
@@ -116,9 +116,9 @@ class SensorsData {
     // Deserialize message field [op_mode]
     data.op_mode = _deserializer.string(buffer, bufferOffset);
     // Deserialize message field [speed]
-    data.speed = _deserializer.uint32(buffer, bufferOffset);
+    data.speed = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [angle]
-    data.angle = _deserializer.uint32(buffer, bufferOffset);
+    data.angle = _deserializer.int32(buffer, bufferOffset);
     // Deserialize message field [motor_cnt]
     data.motor_cnt = _deserializer.uint32(buffer, bufferOffset);
     // Deserialize message field [servo_cnt]
@@ -147,15 +147,15 @@ class SensorsData {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return 'e00fea77b9600c9d4424dbbf41aef137';
+    return 'ca5a2621c8a00e6fea801ce1abd88ec5';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
     string op_mode
-    uint32 speed
-    uint32 angle
+    int32 speed
+    int32 angle
     uint32 motor_cnt
     uint32 servo_cnt
     bool wheel_1_success

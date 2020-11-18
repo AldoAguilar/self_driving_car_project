@@ -35,10 +35,10 @@ struct ActuatorsCommandData_
 
 
 
-   typedef uint32_t _speed_type;
+   typedef int32_t _speed_type;
   _speed_type speed;
 
-   typedef uint32_t _angle_type;
+   typedef int32_t _angle_type;
   _angle_type angle;
 
 
@@ -128,12 +128,12 @@ struct MD5Sum< ::ros_self_driving_car::ActuatorsCommandData_<ContainerAllocator>
 {
   static const char* value()
   {
-    return "9caa6924c81cdc9852d0edbb4d6db3f1";
+    return "1562a5a885c295584eaf5e0ababaabd7";
   }
 
   static const char* value(const ::ros_self_driving_car::ActuatorsCommandData_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x9caa6924c81cdc98ULL;
-  static const uint64_t static_value2 = 0x52d0edbb4d6db3f1ULL;
+  static const uint64_t static_value1 = 0x1562a5a885c29558ULL;
+  static const uint64_t static_value2 = 0x4eaf5e0ababaabd7ULL;
 };
 
 template<class ContainerAllocator>
@@ -152,8 +152,8 @@ struct Definition< ::ros_self_driving_car::ActuatorsCommandData_<ContainerAlloca
 {
   static const char* value()
   {
-    return "uint32 speed\n"
-"uint32 angle\n"
+    return "int32 speed\n"
+"int32 angle\n"
 ;
   }
 
@@ -193,9 +193,9 @@ struct Printer< ::ros_self_driving_car::ActuatorsCommandData_<ContainerAllocator
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::ros_self_driving_car::ActuatorsCommandData_<ContainerAllocator>& v)
   {
     s << indent << "speed: ";
-    Printer<uint32_t>::stream(s, indent + "  ", v.speed);
+    Printer<int32_t>::stream(s, indent + "  ", v.speed);
     s << indent << "angle: ";
-    Printer<uint32_t>::stream(s, indent + "  ", v.angle);
+    Printer<int32_t>::stream(s, indent + "  ", v.angle);
   }
 };
 

@@ -7,14 +7,14 @@ import struct
 
 
 class ActuatorsCommandData(genpy.Message):
-  _md5sum = "9caa6924c81cdc9852d0edbb4d6db3f1"
+  _md5sum = "1562a5a885c295584eaf5e0ababaabd7"
   _type = "ros_self_driving_car/ActuatorsCommandData"
   _has_header = False #flag to mark the presence of a Header object
-  _full_text = """uint32 speed
-uint32 angle
+  _full_text = """int32 speed
+int32 angle
 """
   __slots__ = ['speed','angle']
-  _slot_types = ['uint32','uint32']
+  _slot_types = ['int32','int32']
 
   def __init__(self, *args, **kwds):
     """
@@ -54,7 +54,7 @@ uint32 angle
     """
     try:
       _x = self
-      buff.write(_get_struct_2I().pack(_x.speed, _x.angle))
+      buff.write(_get_struct_2i().pack(_x.speed, _x.angle))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -68,7 +68,7 @@ uint32 angle
       _x = self
       start = end
       end += 8
-      (_x.speed, _x.angle,) = _get_struct_2I().unpack(str[start:end])
+      (_x.speed, _x.angle,) = _get_struct_2i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -82,7 +82,7 @@ uint32 angle
     """
     try:
       _x = self
-      buff.write(_get_struct_2I().pack(_x.speed, _x.angle))
+      buff.write(_get_struct_2i().pack(_x.speed, _x.angle))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -97,7 +97,7 @@ uint32 angle
       _x = self
       start = end
       end += 8
-      (_x.speed, _x.angle,) = _get_struct_2I().unpack(str[start:end])
+      (_x.speed, _x.angle,) = _get_struct_2i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e) #most likely buffer underfill
@@ -106,9 +106,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_2I = None
-def _get_struct_2I():
-    global _struct_2I
-    if _struct_2I is None:
-        _struct_2I = struct.Struct("<2I")
-    return _struct_2I
+_struct_2i = None
+def _get_struct_2i():
+    global _struct_2i
+    if _struct_2i is None:
+        _struct_2i = struct.Struct("<2i")
+    return _struct_2i

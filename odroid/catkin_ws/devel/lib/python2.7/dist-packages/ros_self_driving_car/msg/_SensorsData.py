@@ -7,12 +7,12 @@ import struct
 
 
 class SensorsData(genpy.Message):
-  _md5sum = "e00fea77b9600c9d4424dbbf41aef137"
+  _md5sum = "ca5a2621c8a00e6fea801ce1abd88ec5"
   _type = "ros_self_driving_car/SensorsData"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """string op_mode
-uint32 speed
-uint32 angle
+int32 speed
+int32 angle
 uint32 motor_cnt
 uint32 servo_cnt
 bool wheel_1_success
@@ -21,7 +21,7 @@ bool wheel_3_success
 bool wheel_4_success
 """
   __slots__ = ['op_mode','speed','angle','motor_cnt','servo_cnt','wheel_1_success','wheel_2_success','wheel_3_success','wheel_4_success']
-  _slot_types = ['string','uint32','uint32','uint32','uint32','bool','bool','bool','bool']
+  _slot_types = ['string','int32','int32','uint32','uint32','bool','bool','bool','bool']
 
   def __init__(self, *args, **kwds):
     """
@@ -88,7 +88,7 @@ bool wheel_4_success
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_4I4B().pack(_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success))
+      buff.write(_get_struct_2i2I4B().pack(_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -111,7 +111,7 @@ bool wheel_4_success
       _x = self
       start = end
       end += 20
-      (_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success,) = _get_struct_4I4B().unpack(str[start:end])
+      (_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success,) = _get_struct_2i2I4B().unpack(str[start:end])
       self.wheel_1_success = bool(self.wheel_1_success)
       self.wheel_2_success = bool(self.wheel_2_success)
       self.wheel_3_success = bool(self.wheel_3_success)
@@ -135,7 +135,7 @@ bool wheel_4_success
         length = len(_x)
       buff.write(struct.pack('<I%ss'%length, length, _x))
       _x = self
-      buff.write(_get_struct_4I4B().pack(_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success))
+      buff.write(_get_struct_2i2I4B().pack(_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -159,7 +159,7 @@ bool wheel_4_success
       _x = self
       start = end
       end += 20
-      (_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success,) = _get_struct_4I4B().unpack(str[start:end])
+      (_x.speed, _x.angle, _x.motor_cnt, _x.servo_cnt, _x.wheel_1_success, _x.wheel_2_success, _x.wheel_3_success, _x.wheel_4_success,) = _get_struct_2i2I4B().unpack(str[start:end])
       self.wheel_1_success = bool(self.wheel_1_success)
       self.wheel_2_success = bool(self.wheel_2_success)
       self.wheel_3_success = bool(self.wheel_3_success)
@@ -172,9 +172,9 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_4I4B = None
-def _get_struct_4I4B():
-    global _struct_4I4B
-    if _struct_4I4B is None:
-        _struct_4I4B = struct.Struct("<4I4B")
-    return _struct_4I4B
+_struct_2i2I4B = None
+def _get_struct_2i2I4B():
+    global _struct_2i2I4B
+    if _struct_2i2I4B is None:
+        _struct_2i2I4B = struct.Struct("<2i2I4B")
+    return _struct_2i2I4B

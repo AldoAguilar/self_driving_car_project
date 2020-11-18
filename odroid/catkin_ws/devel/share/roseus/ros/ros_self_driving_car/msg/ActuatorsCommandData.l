@@ -35,41 +35,41 @@
   (:serialization-length
    ()
    (+
-    ;; uint32 _speed
+    ;; int32 _speed
     4
-    ;; uint32 _angle
+    ;; int32 _angle
     4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; uint32 _speed
+     ;; int32 _speed
        (write-long _speed s)
-     ;; uint32 _angle
+     ;; int32 _angle
        (write-long _angle s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; uint32 _speed
+   ;; int32 _speed
      (setq _speed (sys::peek buf ptr- :integer)) (incf ptr- 4)
-   ;; uint32 _angle
+   ;; int32 _angle
      (setq _angle (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;;
    self)
   )
 
-(setf (get ros_self_driving_car::ActuatorsCommandData :md5sum-) "9caa6924c81cdc9852d0edbb4d6db3f1")
+(setf (get ros_self_driving_car::ActuatorsCommandData :md5sum-) "1562a5a885c295584eaf5e0ababaabd7")
 (setf (get ros_self_driving_car::ActuatorsCommandData :datatype-) "ros_self_driving_car/ActuatorsCommandData")
 (setf (get ros_self_driving_car::ActuatorsCommandData :definition-)
-      "uint32 speed
-uint32 angle
+      "int32 speed
+int32 angle
 
 ")
 
 
 
-(provide :ros_self_driving_car/ActuatorsCommandData "9caa6924c81cdc9852d0edbb4d6db3f1")
+(provide :ros_self_driving_car/ActuatorsCommandData "1562a5a885c295584eaf5e0ababaabd7")
 
 
